@@ -1,6 +1,6 @@
 #Maori Myths and Legends Quiz Game
 #Author: Levi Pearce
-#Version 1
+#Version 1.1
 
 
 
@@ -70,11 +70,35 @@ Questions_2= [{"question_text": "1. What is the primary point of Maori Myths and
                "correct_answer": "b"},
              ] 
 
-
+#LVL 2
 score_2 = 0
 
+#LVL 3           
+Questions_3= [{"question_text": "1. Who are Maui's parents?",
+              "options": ["a) Makeatutara and Taranga", "b) Tane Irawaru and Hineahuone Urangi", "c) Manwhaia and Turianga", "d) Hukainga and Maniaka", "e) Wairuanga and Kaitiangi"],
+              "correct_answer": "a"},
+             
+             {"question_text": "2. According to Maori Mythology how was was the milky way created?",
+               "options": ["a) Io-matua-kore, the 'supreme God' created the stars to give him and the other Gods light", "b) They are the dry, solid tears of the Sky Father (Ranginui), who wept for his beloved (Earth Mother) after being separated", "c) It is a shark, sent up to the sea of the sky by the Demigod Maui to watch over and protect the Maori tribes on earth", "d) They are fragments from an explosion, caused by the God Tūmatauenga, who was jealous of his brother, Tane", "e) The Sky Father put them in the sky so that his beloved, the Earth mother, could see them on earth, and think of him at night"],
+               "correct_answer": "c"},
+             
+             
+             {"question_text": "3. What happened to Maui when he was a baby?",
+               "options": ["a) He was blessed by the Sky Father (Ranginui) with a special Karakia, which gave him superhuman strength and courage", "b) He was cast into the ocean by his mother, as he was premature", "c) He was abandoned in the bush, eventually being found by his siblings", "d) He as taken by his father, who hid him in the underworld", "e) Nothing, as he had a protective spell over him as soon as he formed in his mother's womb"],
+               "correct_answer": "b"},    
+             
+             
+             {"question_text": "4. How many brothers did Tane Mahuta have?",
+               "options": ["a) 14", "b) 7", "c) 5", "d) 0", "e) It is unknown how many siblings Tane Mahuta had, as over years, the number has become varied"],
+               "correct_answer": "b"}, 
+             
+             
+             {"question_text": "5. How many brothers did Maui have?",
+               "options": ["a) 7", "b) 3", "c) 4", "d) 2", "e) None, he was the only male offspring in his family"],
+               "correct_answer": "c"},
+             ] 
 
-
+score_3 = 0
 
   
 keep_going = ""
@@ -132,17 +156,6 @@ while keep_going == "":
             print("")
             print("")
             print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            
             print("""                                                       That was level one, time for level two! 
                                                            This level is harder, good luck!""")
             print("")
@@ -175,7 +188,48 @@ while keep_going == "":
 
             round_2_result = score_2 / len(Questions_2)
             print (f"You got {score_2} / {len(Questions_2)} questions correct!")
-            
+
+            print()
+            print()
+            print()
+            print()
+           
+            print()
+            print()
+            print("That was level 2")
+            print("It is now time for the hardest and last level; level 3")
+            print("You will have five possible answers per questions, with the questions being the hardest of all three levels")
+            print()
+            print()
+            print("Good Luck")
+            print()
+            print()
+
+            for question in Questions_3:
+                print(question["question_text"])
+
+
+                for option in question["options"]:
+                    print (option)
+                print()
+
+
+                user_input = input("Enter your answer: ")
+                question["user_input"] = user_input 
+
+
+            for index, question in enumerate(Questions_3):
+                if question["user_input"] == question["correct_answer"]:
+                    score_3 += 1
+                    print(f"{index + 1}. Correct Answer")
+                else:
+                    print(f"{index + 1}. Wrong Answer, the correct answer was {question['correct_answer']}")
+
+
+            print()
+
+            round_3_result = score_3 / len(Questions_3)
+            print (f"You got {score_3} / {len(Questions_3)} questions correct!")
 
 
         
