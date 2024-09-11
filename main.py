@@ -1,9 +1,10 @@
 #Maori Myths and Legends Quiz Game
 #Author: Levi Pearce
-#Version 1.1
+#Version 1.2
 
+high_score = 0 
 
-
+#Variable that holds the instructions to my game that can be called at any time. This helps to keep my code clean. 
 intructions = ("""                                             
                
                                                          Welcome to my Maori Myths and Legends quiz
@@ -16,10 +17,10 @@ intructions = ("""
 
 
 
-#LVL 1
-Questions_1= [{"question_text": "1. According to Maori Mythology, What is a Taniwha?",
-              "options": ["a) A serpentine like monster that dwells in deep waterways", "b) A fiery bird that lives in the sky", "c) A tree dwelling creature that waatches over the forest", "d) None of the above, it doesn't exist"],
-              "correct_answer": "a"},
+#LVL 1 #Index for level one. This holds all five questions and the possible answers for each respective question.
+Questions_1= [{"question_text": "1. According to Maori Mythology, What is a Taniwha?", 
+              "options": ["a) A serpentine like monster that dwells in deep waterways", "b) A fiery bird that lives in the sky", "c) A tree dwelling creature that waatches over the forest", "d) None of the above, it doesn't exist"], #Data is stored in lists (listing the four different option for each question.)
+              "correct_answer": "a"}, #stores the correct answer for the question. 
              
              {"question_text": "2. Why did Maui and his Brothers Slow the Sun?",
                "options": ["a) Because it was beating down too fast, causing their crops to die", "b) It was moving too fast through the sky, not giving them enough time to complete their chores", "c) It was going too high, causing the days to be long and cold", "d) It was rising too quickly, not giving them enough time to rest"],
@@ -41,14 +42,13 @@ Questions_1= [{"question_text": "1. According to Maori Mythology, What is a Tani
                "correct_answer": "d"},
              ]   
 
-#LVL 1
-score_1 = 0
 
 
-#LVL 2
+
+#LVL 2    #Index for level Two. This holds all five questions and the possible answers for each respective question.
 Questions_2= [{"question_text": "1. What is the primary point of Maori Myths and Legends?",
               "options": ["a) To tell extraordinairy stories with their villages", "b) To pass on their history and past to the next generation", "c) To tell and inform other cultures about their own culture and story", "d) To act as substitutes to books and the written language"],
-              "correct_answer": "b"},
+              "correct_answer": "b"},   #stores the correct answer for the question.
              
              {"question_text": "2. According to Maori Mythology, who is responsible for the separation of the Earth mother (Papatuanuku) and the Sky Father (Ranginui)?",
                "options": ["a) Maui, as they were trapping humans between their grasp", "b) Humans, as they arrived in between them, forcing them apart", "c) Tane Mahuta, as he and his brothers wanted space", "d) Tumatauenga, the god of war and human activity was sick of being confined, so he pushed them apart"],
@@ -70,13 +70,13 @@ Questions_2= [{"question_text": "1. What is the primary point of Maori Myths and
                "correct_answer": "b"},
              ] 
 
-#LVL 2
-score_2 = 0
 
-#LVL 3           
+
+
+#LVL 3           #Index for level Three. This holds all five questions and the possible answers for each respective question.
 Questions_3= [{"question_text": "1. Who are Maui's parents?",
               "options": ["a) Makeatutara and Taranga", "b) Tane Irawaru and Hineahuone Urangi", "c) Manwhaia and Turianga", "d) Hukainga and Maniaka", "e) Wairuanga and Kaitiangi"],
-              "correct_answer": "a"},
+              "correct_answer": "a"}, #stores the correct answer for the question.
              
              {"question_text": "2. According to Maori Mythology how was was the milky way created?",
                "options": ["a) Io-matua-kore, the 'supreme God' created the stars to give him and the other Gods light", "b) They are the dry, solid tears of the Sky Father (Ranginui), who wept for his beloved (Earth Mother) after being separated", "c) It is a shark, sent up to the sea of the sky by the Demigod Maui to watch over and protect the Maori tribes on earth", "d) They are fragments from an explosion, caused by the God Tūmatauenga, who was jealous of his brother, Tane", "e) The Sky Father put them in the sky so that his beloved, the Earth mother, could see them on earth, and think of him at night"],
@@ -98,13 +98,46 @@ Questions_3= [{"question_text": "1. Who are Maui's parents?",
                "correct_answer": "c"},
              ] 
 
-score_3 = 0
 
-  
+
+ 
+ # Saving high score to a file
+def save_high_score(score, filename="high_score.txt"):
+       with open(filename, "w") as file:
+           file.write(str(score))
+ 
+ 
+ 
+# Loading high score from a file
+def load_high_score(filename="high_score.txt"):
+    try:
+        with open(filename, "r") as file:
+            return int(file.read())
+    except FileNotFoundError:
+        return 0  # Return 0 if the file does not exist 
+ 
+
+
+# Updating high score   
+def update_high_score(score, filename="high_score.txt"):
+    high_score = load_high_score(filename)
+    if score > high_score:
+        save_high_score(score, filename)
+        return score
+    return high_score
+
+
+
+
+
+  #Loop that contains all code for game inside it, as it is indented, also looping back if the input from play_screen is not valid 
+  # (numbers or characters.)
 keep_going = ""
-while keep_going == "":
+while keep_going == "":  #Set the parameters to nothing, meaning it loops back over and over. 
+    score_1 = 0
+    score_2 = 0
+    score_3 = 0
     #Creating a variable that allows user to enter an input.
-
     play_screen = input ("""                                                            Maori Myths and Legends Quiz Game
                                                                  Press <enter> to begin! """)
     #If user presses <enter> button, ask for their name and give them instructions. Done using 'if' statements.
@@ -113,12 +146,13 @@ while keep_going == "":
         name = input ("""                                                               
                     
                                                                  Please enter your name: """)
-        
-        print ("""                                 
+                                #Adding the name from the 'name' variable and putting it with other 'print' statements.
+        if name != "":  #Checks if the input entered from the name input if not "" or 'nothing'                      
+            print ("""                                 
                                                               Alright""" + ' ' + name + ',' + ' ' + """Here's your instructions:""")
-        print (intructions)
+            print (intructions)#Variable that holds the instructions for the game.
         
-        if name != "":
+        
             print("")
             print("")
             print("")
@@ -127,31 +161,33 @@ while keep_going == "":
             print("")
             
 
-            for question in Questions_1:
-                print(question["question_text"])
+            for question in Questions_1: #For each question in the 'Questions_1' index:
+                print(question["question_text"]) #print the Question
 
 
-                for option in question["options"]:
+                for option in question["options"]: #Print The options for the current question
                     print (option)
-                print()
+                print() 
 
 
-                user_input = input("Enter your answer: ")
-                question["user_input"] = user_input 
+                user_input = input("Enter your answer: ") #Prints the text "Enter your answer" and allow the user to enter an input after the text. 
+                print ('')
+                question["user_input"] = user_input #This variable holds the user input for 'input("Enter your answer: ") which stores the input 
+                                                    #This means that this variable holds the user's input/answer to the current question.                                                                             
 
-
-            for index, question in enumerate(Questions_1):
-                if question["user_input"] == question["correct_answer"]:
-                    score_1 += 1
-                    print(f"{index + 1}. Correct Answer")
+            for index, question in enumerate(Questions_1): #Enumerate (count one by one) the questions in (Questions_1) and check each answer.
+                if question["user_input"] == question["correct_answer"]: #If the user's input is equal to the 'correct answer', 
+                    score_1 += 1                                             #add one to the 'score_1' variable that tracks the score for round 1. 
+                    print(f"{index + 1}. Correct Answer") #Adds one to index to know what question it up to.
                 else:
-                    print(f"{index + 1}. Wrong Answer, the correct answer was {question['correct_answer']}")
-
+                    print(f"{index + 1}. Wrong Answer, the correct answer was {question['correct_answer']}") #Add one to the index even if input is
+                                                                                                               #Wrong so it doesn't repeat question.
 
             print()
 
-            round_1_result = score_1 / len(Questions_1)
-            print (f"You got {score_1} / {len(Questions_1)} questions correct!")
+            round_1_result = score_1 / len(Questions_1) #Variable that compares (score_1)'s value out of the number of questions in 'Questions_1'
+            #this is done by using the 'len' command, which checks for the number of items/objects in something. In this case is the 'Questions_1' variable.
+            print (f"You got {score_1} / {len(Questions_1)} questions correct for round 1!")
             print("")
             print("")
             print("")
@@ -187,7 +223,7 @@ while keep_going == "":
             print()
 
             round_2_result = score_2 / len(Questions_2)
-            print (f"You got {score_2} / {len(Questions_2)} questions correct!")
+            print (f"You got {score_2} / {len(Questions_2)} questions correct for round 2!")
 
             print()
             print()
@@ -228,8 +264,31 @@ while keep_going == "":
 
             print()
 
+
             round_3_result = score_3 / len(Questions_3)
-            print (f"You got {score_3} / {len(Questions_3)} questions correct!")
+            print (f"You got {score_3} / {len(Questions_3)} questions correct for round 3!")
+
+            #showing all scores
+            score = score_1 + score_2 + score_3
+            print(f"Your total score is {score}!")
+            print()
+
+            print("The current high score is:", load_high_score()) # Print the current high score. Optional
+            high_score = update_high_score(score) # Update the high score. You need this.
+            print(f"You got a high score of {high_score}!") # Print the high score
+            print("The high score that is stored is now:", load_high_score()) # Print the high score that is stored
+
+
+
+        
+            
+
+            # 
+            # print (f"\nYour total score is {total_score}/15.")
+
+            # if total_score > high_score:
+            #     high_score = total_score
+            #     print (f"high score is {high_score}.")
 
 
         
@@ -242,6 +301,7 @@ while keep_going == "":
         else:
           print("                                                                That is not a valid input.")
     
+          print("")      
           keep_going = input("                                                 Press <enter> to play the game or any other key to quit: ")
 
 
