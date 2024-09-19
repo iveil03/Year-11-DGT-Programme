@@ -1,6 +1,6 @@
 #Maori Myths and Legends Quiz Game
 #Author: Levi Pearce
-#Version 1.2
+#Version 1.3
 
 high_score = 0 
 
@@ -101,14 +101,14 @@ Questions_3= [{"question_text": "1. Who are Maui's parents?",
 
 
  
- # Saving high score to a file
+ # Saving high score to a text file where the high score will be stored. 
 def save_high_score(score, filename="high_score.txt"):
        with open(filename, "w") as file:
            file.write(str(score))
  
  
  
-# Loading high score from a file
+# Loading high score from a file 
 def load_high_score(filename="high_score.txt"):
     try:
         with open(filename, "r") as file:
@@ -118,7 +118,7 @@ def load_high_score(filename="high_score.txt"):
  
 
 
-# Updating high score   
+# Updating high score if the score is higher than the current high score, and if it is, save the new high score to the file and then return the new high score.   
 def update_high_score(score, filename="high_score.txt"):
     high_score = load_high_score(filename)
     if score > high_score:
@@ -163,6 +163,7 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
 
             for question in Questions_1: #For each question in the 'Questions_1' index:
                 print(question["question_text"]) #print the Question
+                print ("")
 
 
                 for option in question["options"]: #Print The options for the current question
@@ -187,7 +188,9 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
 
             round_1_result = score_1 / len(Questions_1) #Variable that compares (score_1)'s value out of the number of questions in 'Questions_1'
             #this is done by using the 'len' command, which checks for the number of items/objects in something. In this case is the 'Questions_1' variable.
-            print (f"You got {score_1} / {len(Questions_1)} questions correct for round 1!")
+            print ('-------------------------------------------')
+            print (f"{name}, you got {score_1} / {len(Questions_1)} questions correct for round 1!") #Using the len command to count the number of questions were answered correctly in round 1/2/3 by the user(s)
+            print ('-------------------------------------------')
             print("")
             print("")
             print("")
@@ -199,8 +202,10 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
             print("")
             print("")
 
-            for question in Questions_2:
+              #Refer to Commenting for Questions 1
+            for question in Questions_2: 
                 print(question["question_text"])
+                print ("")
 
 
                 for option in question["options"]:
@@ -209,6 +214,7 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
 
 
                 user_input = input("Enter your answer: ")
+                print('')
                 question["user_input"] = user_input 
 
 
@@ -223,12 +229,13 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
             print()
 
             round_2_result = score_2 / len(Questions_2)
-            print (f"You got {score_2} / {len(Questions_2)} questions correct for round 2!")
+            print('')
+            print('-------------------------------------------')
+        
+            print (f"{name}, you got {score_2} / {len(Questions_2)} questions correct for round 2!")
+            print('-------------------------------------------')
 
-            print()
-            print()
-            print()
-            print()
+           
            
             print()
             print()
@@ -241,8 +248,10 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
             print()
             print()
 
+              #Refer to Questions 1
             for question in Questions_3:
                 print(question["question_text"])
+                print ("")
 
 
                 for option in question["options"]:
@@ -251,6 +260,7 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
 
 
                 user_input = input("Enter your answer: ")
+                print('')
                 question["user_input"] = user_input 
 
 
@@ -266,11 +276,17 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
 
 
             round_3_result = score_3 / len(Questions_3)
-            print (f"You got {score_3} / {len(Questions_3)} questions correct for round 3!")
+            print('-------------------------------------------')
+            print (f" {name} you got {score_3} / {len(Questions_3)} questions correct for round 3!")
+            print('-------------------------------------------')
+            print('')
+            print('')
 
-            #showing all scores
+            #showing all scores added together.
             score = score_1 + score_2 + score_3
-            print(f"Your total score is {score}!")
+            print('-------------------------------------------')
+            print(f"Your total score is {score}/15!") #telling user what their total score out of 15.
+            print('-------------------------------------------')
             print()
 
             print("The current high score is:", load_high_score()) # Print the current high score. Optional
@@ -283,12 +299,7 @@ while keep_going == "":  #Set the parameters to nothing, meaning it loops back o
         
             
 
-            # 
-            # print (f"\nYour total score is {total_score}/15.")
-
-            # if total_score > high_score:
-            #     high_score = total_score
-            #     print (f"high score is {high_score}.")
+        
 
 
         
